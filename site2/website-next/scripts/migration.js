@@ -5,12 +5,14 @@
 
 const fs = require("fs");
 const path = require("path");
+const nextSidebar = require("../sidebars");
+const _ = require("lodash");
 
 function travel(dir, callback) {
   fs.readdirSync(dir).forEach((file) => {
     var pathname = path.join(dir, file);
     if (fs.statSync(pathname).isDirectory()) {
-      travel(pathname, callback);
+      // travel(pathname, callback);
     } else {
       callback(pathname);
     }
@@ -51,12 +53,19 @@ try {
     __dirname,
     "../../website/versioned_sidebars/" + version_full + "-sidebars.json"
   );
+  if (version == "next") {
+    sidebar_file = path.join(__dirname, "../../website/sidebars.json");
+  }
   let sidebar = fs.readFileSync(sidebar_file, "utf8");
   sidebar = JSON.parse(sidebar);
-  sidebar = sidebar[version_full + "-docs"][category];
-  sidebar = sidebar.map((item) => {
-    return item.substr(version_full.length + 1);
-  });
+
+  sidebar =
+    sidebar[version == "next" ? "docs" : version_full + "-docs"][category];
+  if (version != "next") {
+    sidebar = sidebar.map((item) => {
+      return item.substr(version_full.length + 1);
+    });
+  }
   if (!sidebar) {
     return;
   }
@@ -64,20 +73,36 @@ try {
     __dirname,
     "../../website-next/versioned_sidebars/" + version_full + "-sidebars.json"
   );
-  let new_sidebar = fs.readFileSync(new_sidebar_file, "utf8");
-  new_sidebar = JSON.parse(new_sidebar);
-  new_sidebar[version_full + "/docsSidebar"].push({
-    type: "category",
-    label: category,
-    items: sidebar.map((item) => {
-      return {
-        type: "doc",
-        id: version_full + "/" + item,
-      };
-    }),
-    collapsible: true,
-    collapsed: true,
-  });
+  let new_sidebar = nextSidebar;
+  if (version == "next") {
+    new_sidebar_file = path.join(__dirname, "../../website-next/sidebars.json");
+    if (!_.keyBy(new_sidebar.docsSidebar, "label")[category]) {
+      new_sidebar.docsSidebar.push({
+        type: "category",
+        label: category,
+        items: sidebar,
+      });
+    }
+  } else {
+    new_sidebar = fs.readFileSync(new_sidebar_file, "utf8");
+    new_sidebar = JSON.parse(new_sidebar);
+    if (
+      !_.keyBy(new_sidebar[version_full + "/docsSidebar"], "label")[category]
+    ) {
+      new_sidebar[version_full + "/docsSidebar"].push({
+        type: "category",
+        label: category,
+        items: sidebar.map((item) => {
+          return {
+            type: "doc",
+            id: version_full + "/" + item,
+          };
+        }),
+        collapsible: true,
+        collapsed: true,
+      });
+    }
+  }
   fs.writeFileSync(new_sidebar_file, JSON.stringify(new_sidebar, null, 2));
 
   // console.log("path: ", src, dest);
@@ -99,7 +124,23 @@ try {
             /<span style="(((?!:).)+):(((?!>).)+);"/g,
             '<span style={{color: "$3"}}'
           )
-          .replace(/\]\(assets\//g, "](/assets/");
+          .replace(/\]\(assets\//g, "](/assets/")
+          .replace(/<table style="table"/g, '<table className={"table"}')
+          .replace(/(<table.+>)/g, "$1\n<tbody>")
+          .replace(/<\/\s*table.*>/g, "</tbody>\n</table>")
+          .replace(/<!--(.*)-->/g, "====$1====")
+          .replace(/(```\w+)/gm, "\r\n$1")
+          .replace(/^\s*```$/gm, "```");
+        // .replace(/<table(.*\n)+<\/table>/gm, "");
+
+        // let tableReg = /<td>((?!<\/td>).)*(\n((?!<\/td>).)*)+<\/td>/gm;
+        let tableReg = /<table(.*\n)+<\/table>/gm;
+        let _match = tableReg.exec(data);
+        if (_match && _match[0]) {
+          let _tableData = _match[0];
+          _tableData = _tableData.replace(/^\s*\n/gm, "");
+          data = data.replace(tableReg, _tableData);
+        }
         fs.writeFileSync(path.join(dest, filename), data);
       } else {
         fs.copyFileSync(pathname, path.join(dest, filename));
