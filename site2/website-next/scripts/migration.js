@@ -19,6 +19,21 @@ function travel(dir, callback) {
   });
 }
 
+function fixTd(data, reg) {
+  const _match = reg.exec(data);
+  if (_match) {
+    let _data = _match[0];
+    _data = _data
+      .replace(/^\s*\n/gm, "")
+      .replace(/<td/, "<TMP")
+      .replace(/<\/td/, "</TMP");
+    let _new_data = data.replace(reg, _data);
+    return fixTd(_new_data, reg);
+  } else {
+    return data.replace(/<TMP/g, "<td").replace(/<\/TMP/g, "</td");
+  }
+}
+
 try {
   const args = process.argv.slice(2);
   const version = args[0];
@@ -131,16 +146,9 @@ try {
           .replace(/<!--(.*)-->/g, "====$1====")
           .replace(/(```\w+)/gm, "\r\n$1")
           .replace(/^\s*```$/gm, "```");
-        // .replace(/<table(.*\n)+<\/table>/gm, "");
 
-        // let tableReg = /<td>((?!<\/td>).)*(\n((?!<\/td>).)*)+<\/td>/gm;
-        let tableReg = /<table(.*\n)+<\/table>/gm;
-        let _match = tableReg.exec(data);
-        if (_match && _match[0]) {
-          let _tableData = _match[0];
-          _tableData = _tableData.replace(/^\s*\n/gm, "");
-          data = data.replace(tableReg, _tableData);
-        }
+        data = fixTd(data, /<td>((?!<\/td>).)*(\n((?!<\/td>).)*)+<\/td>/);
+
         fs.writeFileSync(path.join(dest, filename), data);
       } else {
         fs.copyFileSync(pathname, path.join(dest, filename));
