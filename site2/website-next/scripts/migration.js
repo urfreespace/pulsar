@@ -134,6 +134,7 @@ try {
         let data = fs.readFileSync(pathname, "utf8");
         data = fixTab(data);
         data = data
+          // .replace(/^[\t ]+/gm, "")
           .replace(reg, "id: ")
           .replace(/sidebar_label:\s*(.*):(.*)/, 'sidebar_label: "$1:$2"')
           .replace(/\[\[pulsar:version_number\]\]/g, "<pulsar:version_number>")
