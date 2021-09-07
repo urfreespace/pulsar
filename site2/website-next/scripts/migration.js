@@ -8,6 +8,7 @@ const path = require("path");
 const nextSidebar = require("../sidebars");
 const _ = require("lodash");
 const fixTab = require("./fix-tab");
+const fixSpace = require("./fix-space");
 
 function travel(dir, callback) {
   fs.readdirSync(dir).forEach((file) => {
@@ -133,8 +134,8 @@ try {
         let reg = new RegExp("id:\\s*version-" + version + "-");
         let data = fs.readFileSync(pathname, "utf8");
         data = fixTab(data);
+        data = fixSpace(data);
         data = data
-          // .replace(/^[\t ]+/gm, "")
           .replace(reg, "id: ")
           .replace(/sidebar_label:\s*(.*):(.*)/, 'sidebar_label: "$1:$2"')
           .replace(/\[\[pulsar:version_number\]\]/g, "<pulsar:version_number>")

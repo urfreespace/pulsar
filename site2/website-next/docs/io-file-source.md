@@ -86,7 +86,7 @@ Here is an example of using the File source connecter.
 ```
 
 2. Start Pulsar standalone.
-   
+
 
 ```bash
     $ docker run -d -it -p 6650:6650 -p 8080:8080 -v $PWD/data:/pulsar/data --name pulsar-standalone apachepulsar/pulsar:{version} bin/pulsar standalone
@@ -135,13 +135,13 @@ Here is an example of using the File source connecter.
 ```
 
 8. Write the message to the file _test.txt_.
-   
+
 
 ```bash
     echo "hello world!" > /opt/test.txt
 ```
 
-    The following information appears on the consumer terminal window.
+The following information appears on the consumer terminal window.
 
 
 ```bash
@@ -149,4 +149,3 @@ Here is an example of using the File source connecter.
     hello world!
 ```
 
-    

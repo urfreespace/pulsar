@@ -101,10 +101,10 @@ Before using the ElasticSearch sink connector, you need to create a configuratio
 ```bash
     $ bin/pulsar standalone
 ```
-    Make sure the NAR file is available at `connectors/pulsar-io-elastic-search-{{pulsar:version}}.nar`.
+Make sure the NAR file is available at `connectors/pulsar-io-elastic-search-{{pulsar:version}}.nar`.
 
 3. Start the Pulsar Elasticsearch connector in local run mode using one of the following methods.
-    * Use the **JSON** configuration as shown previously. 
+* Use the **JSON** configuration as shown previously. 
 
 ```bash
         $ bin/pulsar-admin sinks localrun \
@@ -115,8 +115,8 @@ Before using the ElasticSearch sink connector, you need to create a configuratio
             --sink-config '{"elasticSearchUrl":"http://localhost:9200","indexName": "my_index","username": "scooby","password": "doobie"}' \
             --inputs elasticsearch_test
 ```
-    * Use the **YAML** configuration file as shown previously.
-    
+* Use the **YAML** configuration file as shown previously.
+
 
 ```bash
         $ bin/pulsar-admin sinks localrun \
@@ -136,18 +136,18 @@ Before using the ElasticSearch sink connector, you need to create a configuratio
 ```
 
 5. Check documents in Elasticsearch.
-    
-    * refresh the index
+
+* refresh the index
 
 ```bash
             $ curl -s http://localhost:9200/my_index/_refresh
 ``` 
-    * search documents
+* search documents
 
 ```bash
             $ curl -s http://localhost:9200/my_index/_search
 ```
-        You can see the record that published earlier has been successfully written into Elasticsearch.
+You can see the record that published earlier has been successfully written into Elasticsearch.
 
 ```json
         {"took":2,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":1,"relation":"eq"},"max_score":1.0,"hits":[{"_index":"my_index","_type":"_doc","_id":"FSxemm8BLjG_iC0EeTYJ","_score":1.0,"_source":{"a":1}}]}}

@@ -44,14 +44,14 @@ interface, which means you need to implement the {@inject: github:`open`:/pulsar
     void open(final Map<String, Object> config, SourceContext sourceContext) throws Exception;
 ```
 
-    This method is called when the source connector is initialized. 
+This method is called when the source connector is initialized. 
 
-    In this method, you can retrieve all connector specific settings through the passed-in `config` parameter and initialize all necessary resources. 
-    
-    For example, a Kafka connector can create a Kafka client in this `open` method.
+In this method, you can retrieve all connector specific settings through the passed-in `config` parameter and initialize all necessary resources. 
 
-    Besides, Pulsar runtime also provides a `SourceContext` for the 
-    connector to access runtime resources for tasks like collecting metrics. The implementation can save the `SourceContext` for future use.
+For example, a Kafka connector can create a Kafka client in this `open` method.
+
+Besides, Pulsar runtime also provides a `SourceContext` for the 
+connector to access runtime resources for tasks like collecting metrics. The implementation can save the `SourceContext` for future use.
 
 2. Implement the {@inject: github:`read`:/pulsar-io/core/src/main/java/org/apache/pulsar/io/core/Source.java} method.
 
@@ -66,30 +66,30 @@ interface, which means you need to implement the {@inject: github:`open`:/pulsar
         Record<T> read() throws Exception;
 ```
 
-    If nothing to return, the implementation should be blocking rather than returning `null`. 
+If nothing to return, the implementation should be blocking rather than returning `null`. 
 
-    The returned {@inject: github:`Record`:/pulsar-functions/api-java/src/main/java/org/apache/pulsar/functions/api/Record.java} should encapsulate the following information, which is needed by Pulsar IO runtime. 
+The returned {@inject: github:`Record`:/pulsar-functions/api-java/src/main/java/org/apache/pulsar/functions/api/Record.java} should encapsulate the following information, which is needed by Pulsar IO runtime. 
 
-    * {@inject: github:`Record`:/pulsar-functions/api-java/src/main/java/org/apache/pulsar/functions/api/Record.java} should provide the following variables:
+* {@inject: github:`Record`:/pulsar-functions/api-java/src/main/java/org/apache/pulsar/functions/api/Record.java} should provide the following variables:
 
-      |Variable|Required|Description
-      |---|---|---
-      `TopicName`|No|Pulsar topic name from which the record is originated from.
-      `Key`|No| Messages can optionally be tagged with keys.<br/><br/>For more information, see [Routing modes](concepts-messaging.md#routing-modes).|
-      `Value`|Yes|Actual data of the record.
-      `EventTime`|No|Event time of the record from the source.
-      `PartitionId`|No| If the record is originated from a partitioned source, it returns its `PartitionId`. <br/><br/>`PartitionId` is used as a part of the unique identifier by Pulsar IO runtime to deduplicate messages and achieve exactly-once processing guarantee.
-      `RecordSequence`|No|If the record is originated from a sequential source, it returns its `RecordSequence`.<br/><br/>`RecordSequence` is used as a part of the unique identifier by Pulsar IO runtime to deduplicate messages and achieve exactly-once processing guarantee.
-      `Properties` |No| If the record carries user-defined properties, it returns those properties.
-      `DestinationTopic`|No|Topic to which message should be written.
-      `Message`|No|A class which carries data sent by users.<br/><br/>For more information, see [Message.java](https://github.com/apache/pulsar/blob/master/pulsar-client-api/src/main/java/org/apache/pulsar/client/api/Message.java).|
+|Variable|Required|Description
+|---|---|---
+`TopicName`|No|Pulsar topic name from which the record is originated from.
+`Key`|No| Messages can optionally be tagged with keys.<br/><br/>For more information, see [Routing modes](concepts-messaging.md#routing-modes).|
+`Value`|Yes|Actual data of the record.
+`EventTime`|No|Event time of the record from the source.
+`PartitionId`|No| If the record is originated from a partitioned source, it returns its `PartitionId`. <br/><br/>`PartitionId` is used as a part of the unique identifier by Pulsar IO runtime to deduplicate messages and achieve exactly-once processing guarantee.
+`RecordSequence`|No|If the record is originated from a sequential source, it returns its `RecordSequence`.<br/><br/>`RecordSequence` is used as a part of the unique identifier by Pulsar IO runtime to deduplicate messages and achieve exactly-once processing guarantee.
+`Properties` |No| If the record carries user-defined properties, it returns those properties.
+`DestinationTopic`|No|Topic to which message should be written.
+`Message`|No|A class which carries data sent by users.<br/><br/>For more information, see [Message.java](https://github.com/apache/pulsar/blob/master/pulsar-client-api/src/main/java/org/apache/pulsar/client/api/Message.java).|
 
-     * {@inject: github:`Record`:/pulsar-functions/api-java/src/main/java/org/apache/pulsar/functions/api/Record.java} should provide the following methods:
+* {@inject: github:`Record`:/pulsar-functions/api-java/src/main/java/org/apache/pulsar/functions/api/Record.java} should provide the following methods:
 
-        Method|Description
-        |---|---
-        `ack` |Acknowledge that the record is fully processed.
-        `fail`|Indicate that the record fails to be processed.
+Method|Description
+|---|---
+`ack` |Acknowledge that the record is fully processed.
+`fail`|Indicate that the record fails to be processed.
 
 ## Handle schema information
 
@@ -167,11 +167,11 @@ Developing a sink connector **is similar to** developing a source connector, tha
         void write(Record<T> record) throws Exception;
 ```
 
-    During the implementation, you can decide how to write the `Value` and
-    the `Key` to the actual source, and leverage all the provided information such as
-    `PartitionId` and `RecordSequence` to achieve different processing guarantees. 
+During the implementation, you can decide how to write the `Value` and
+the `Key` to the actual source, and leverage all the provided information such as
+`PartitionId` and `RecordSequence` to achieve different processing guarantees. 
 
-    You also need to ack records (if messages are sent successfully) or fail records (if messages fail to send). 
+You also need to ack records (if messages are sent successfully) or fail records (if messages fail to send). 
 
 ## Handling Schema information
 
@@ -356,21 +356,21 @@ Pulsar connectors enable you to move data in and out of Pulsar easily. It is imp
 
 - Check the metrics provided by Pulsar.
 
-  Pulsar connectors expose the metrics that can be collected and used for monitoring the health of **Java** connectors. You can check the metrics by following the [monitoring](deploy-monitoring.md) guide.
+Pulsar connectors expose the metrics that can be collected and used for monitoring the health of **Java** connectors. You can check the metrics by following the [monitoring](deploy-monitoring.md) guide.
 
 - Set and check your customized metrics.
 
-  In addition to the metrics provided by Pulsar, Pulsar allows you to customize metrics for **Java** connectors. Function workers collect user-defined metrics to Prometheus automatically and you can check them in Grafana.
+In addition to the metrics provided by Pulsar, Pulsar allows you to customize metrics for **Java** connectors. Function workers collect user-defined metrics to Prometheus automatically and you can check them in Grafana.
 
 Here is an example of how to customize metrics for a Java connector.
 
 <Tabs 
-  defaultValue="Java"
-  values={[
-  {
-    "label": "Java",
-    "value": "Java"
-  }
+defaultValue="Java"
+values={[
+{
+"label": "Java",
+"value": "Java"
+}
 ]}>
 <TabItem value="Java">
 

@@ -71,7 +71,7 @@ Before using the Redis sink connector, you need to create a configuration file i
         batchTimeMs: 1000
         connectTimeout: 3000
 ```
-  
+
 ### Usage
 
 This example shows how to write records to a Redis database using the Pulsar Redis connector.
@@ -90,12 +90,12 @@ This example shows how to write records to a Redis database using the Pulsar Red
 ```bash
     $ bin/pulsar standalone
 ```
-    Make sure the NAR file is available at `connectors/pulsar-io-redis-{{pulsar:version}}.nar`.
-   
+Make sure the NAR file is available at `connectors/pulsar-io-redis-{{pulsar:version}}.nar`.
+
 3. Start the Pulsar Redis connector in local run mode using one of the following methods.
 
-   * Use the **JSON** configuration file as shown previously. 
-     
+* Use the **JSON** configuration file as shown previously. 
+
 
 ```bash
         $ bin/pulsar-admin sinks localrun \
@@ -106,9 +106,9 @@ This example shows how to write records to a Redis database using the Pulsar Red
         --sink-config '{"redisHosts": "localhost:6379","redisPassword": "mypassword","redisDatabase": "0","clientMode": "Standalone","operationTimeout": "3000","batchSize": "1"}' \
         --inputs my-redis-topic
 ```
-   
-   * Use the **YAML** configuration file as shown previously.
-      
+
+* Use the **YAML** configuration file as shown previously.
+
 
 ```bash
         $ bin/pulsar-admin sinks localrun \
@@ -119,7 +119,7 @@ This example shows how to write records to a Redis database using the Pulsar Red
         --sink-config-file redis-sink-config.yaml \
         --inputs my-redis-topic
 ```
-     
+
 4. Publish records to the topic.
 
 
@@ -131,12 +131,12 @@ This example shows how to write records to a Redis database using the Pulsar Red
 ```     
 
 5. Start a Redis client in Docker.
-   
+
 
 ```bash
     $ docker exec -it my-redis redis-cli -a "mypassword"
 ```
-   
+
 6. Check the key/value in Redis.
 
 

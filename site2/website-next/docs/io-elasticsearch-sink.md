@@ -14,7 +14,7 @@ The Elasticsearch sink connector pulls messages from Pulsar topics and persists 
 ## Feature 
 
 ### Handle data
-		
+
 Since Pulsar 2.9.0, the Elasticsearch sink connector has the following ways of
 working. You can choose one of them.
 
@@ -32,17 +32,17 @@ entry.<br /><br />The `DELETE` operation can be performed when the primary key i
 not empty and the remaining value is empty. Use the `nullValueAction` to
 configure this behaviour. The default configuration simply ignores such empty
 values.
-		
+
 ### Map multiple indexes
-		
+
 Since Pulsar 2.9.0, the `indexName` property is no more required. If you omit it, the sink writes to an index name after the Pulsar topic name.
-		
+
 ### Enable bulk writes
-		
+
 Since Pulsar 2.9.0, you can use bulk writes by setting the `bulkEnabled` property to `true`.
-		
+
 ### Enable secure connections via TLS
-		
+
 Since Pulsar 2.9.0, you can enable secure connections with TLS.  
 
 ## Configuration
@@ -169,10 +169,10 @@ Before using the Elasticsearch sink connector, you need to create a configuratio
 ```bash
     $ bin/pulsar standalone
 ```
-    Make sure the NAR file is available at `connectors/pulsar-io-elastic-search-{{pulsar:version}}.nar`.
+Make sure the NAR file is available at `connectors/pulsar-io-elastic-search-{{pulsar:version}}.nar`.
 
 3. Start the Pulsar Elasticsearch connector in local run mode using one of the following methods.
-    * Use the **JSON** configuration as shown previously. 
+* Use the **JSON** configuration as shown previously. 
 
 ```bash
         $ bin/pulsar-admin sinks localrun \
@@ -183,8 +183,8 @@ Before using the Elasticsearch sink connector, you need to create a configuratio
             --sink-config '{"elasticSearchUrl":"http://localhost:9200","indexName": "my_index","username": "scooby","password": "doobie"}' \
             --inputs elasticsearch_test
 ```
-    * Use the **YAML** configuration file as shown previously.
-    
+* Use the **YAML** configuration file as shown previously.
+
 
 ```bash
         $ bin/pulsar-admin sinks localrun \
@@ -204,18 +204,18 @@ Before using the Elasticsearch sink connector, you need to create a configuratio
 ```
 
 5. Check documents in Elasticsearch.
-    
-    * refresh the index
+
+* refresh the index
 
 ```bash
             $ curl -s http://localhost:9200/my_index/_refresh
 ``` 
-    * search documents
+* search documents
 
 ```bash
             $ curl -s http://localhost:9200/my_index/_search
 ```
-        You can see the record that published earlier has been successfully written into Elasticsearch.
+You can see the record that published earlier has been successfully written into Elasticsearch.
 
 ```json
         {"took":2,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":1,"relation":"eq"},"max_score":1.0,"hits":[{"_index":"my_index","_type":"_doc","_id":"FSxemm8BLjG_iC0EeTYJ","_score":1.0,"_source":{"a":1}}]}}

@@ -63,7 +63,7 @@ Before using the InfluxDB sink connector, you need to create a configuration fil
         "batchSize": 100
     }
 ```
-  
+
 * YAML
 
 ```yaml
@@ -79,7 +79,7 @@ Before using the InfluxDB sink connector, you need to create a configuration fil
         batchSize: 100
     }
 ```
-  
+
 #### InfluxDBv1
 
 * JSON 

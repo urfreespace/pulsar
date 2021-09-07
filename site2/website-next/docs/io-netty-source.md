@@ -71,7 +71,7 @@ The following examples show how to use the Netty source connector with TCP and H
 ```
 
 2. Create a configuration file _netty-source-config.yaml_.
-   
+
 
 ```yaml
     configs:
@@ -95,9 +95,9 @@ The following examples show how to use the Netty source connector with TCP and H
     $ docker exec -it pulsar-netty-standalone /bin/bash
     curl -O http://mirror-hk.koddos.net/apache/pulsar/pulsar-{version}/connectors/pulsar-io-netty-{version}.nar
 ```
-    
+
 5. Start the Netty source connector.
-   
+
 
 ```bash
    $ ./bin/pulsar-admin sources localrun \
@@ -160,7 +160,7 @@ The following examples show how to use the Netty source connector with TCP and H
 ```
 
 2. Create a configuration file _netty-source-config.yaml_.
-   
+
 
 ```yaml
     configs:
@@ -171,7 +171,7 @@ The following examples show how to use the Netty source connector with TCP and H
 ```
 
 3. Copy the configuration file _netty-source-config.yaml_ to Pulsar server.
-   
+
 
 ```bash
     $ docker cp netty-source-config.yaml pulsar-netty-standalone:/pulsar/conf/
@@ -184,9 +184,9 @@ The following examples show how to use the Netty source connector with TCP and H
     $ docker exec -it pulsar-netty-standalone /bin/bash
     curl -O http://mirror-hk.koddos.net/apache/pulsar/pulsar-{version}/connectors/pulsar-io-netty-{version}.nar
 ```
-    
+
 5. Start the Netty source connector.
-   
+
 
 ```bash
    $ ./bin/pulsar-admin sources localrun \

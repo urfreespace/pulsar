@@ -72,15 +72,15 @@ Start the Mongo sink in localrun mode using the `localrun` command.
 Use one of the following methods to get a connector log in localrun mode:
 * After executing the `localrun` command, the **log is automatically printed on the console**.
 * The log is located at:
-  
+
 
 ```bash
     logs/functions/tenant/namespace/function-name/function-name-instance-id.log
 ```
-    
-    **Example**
-    
-    The path of the Mongo sink connector is:
+
+**Example**
+
+The path of the Mongo sink connector is:
 
 ```bash
     logs/functions/public/default/pulsar-mongo-sink/pulsar-mongo-sink-0.log
@@ -91,9 +91,9 @@ To clearly explain the log information, here breaks down the large block of info
 ```
     08:21:54.132 [main] INFO  org.apache.pulsar.common.nar.NarClassLoader - Created class loader with paths: [file:/tmp/pulsar-nar/pulsar-io-mongo-2.4.0.nar-unpacked/, file:/tmp/pulsar-nar/pulsar-io-mongo-2.4.0.nar-unpacked/META-INF/bundled-dependencies/,
 ```
-    > #### Tip
-    >
-    > If `class cannot be found` exception is thrown, check whether the nar file is decompressed in the folder `file:/tmp/pulsar-nar/pulsar-io-mongo-2.4.0.nar-unpacked/META-INF/bundled-dependencies/` or not.
+> #### Tip
+>
+> If `class cannot be found` exception is thrown, check whether the nar file is decompressed in the folder `file:/tmp/pulsar-nar/pulsar-io-mongo-2.4.0.nar-unpacked/META-INF/bundled-dependencies/` or not.
 * This piece of log information illustrates the basic information about the Mongo sink connector, such as tenant, namespace, name, parallelism, resources, and so on, which can be used to **check whether the Mongo sink connector is configured correctly or not**.
 
 ```bash
@@ -195,7 +195,7 @@ In cluster mode, multiple connectors can run on a worker. To find the log path o
 ### Use admin CLI
 Pulsar admin CLI helps you debug Pulsar connectors with the following subcommands:
 * [`get`](#get)
-  
+
 * [`status`](#status)
 * [`topics stats`](#topics-stats)  
 
@@ -330,21 +330,21 @@ Use the `topics stats` command to get the stats for a topic and its connected pr
 ## Checklist
 This checklist indicates the major areas to check when you debug connectors. It is a reminder of what to look for to ensure a thorough review and an evaluation tool to get the status of connectors. 
 * Does Pulsar start successfully?
-  
+
 * Does the external service run normally?
-  
+
 * Is the nar package complete?
-  
+
 * Is the connector configuration file correct?
-  
+
 * In localrun mode, run a connector and check the printed information (connector log) on the console.
-  
+
 * In cluster mode：
-  
-   * Use the `get` command to get the basic information.
-  
-   * Use the `status` command to get the current status.
-   * Use the `topics stats` command to get the stats for a specified topic and its connected producers and consumers.
-  
-   * Check the connector log.
+
+* Use the `get` command to get the basic information.
+
+* Use the `status` command to get the current status.
+* Use the `topics stats` command to get the stats for a specified topic and its connected producers and consumers.
+
+* Check the connector log.
 * Enter into the external system and verify the result.

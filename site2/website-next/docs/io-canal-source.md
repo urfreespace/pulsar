@@ -49,7 +49,7 @@ Before using the Canal connector, you can create a configuration file through on
 
 * YAML
 
-    You can create a YAML file and copy the [contents](https://github.com/apache/pulsar/blob/master/pulsar-io/canal/src/main/resources/canal-mysql-source-config.yaml) below to your YAML file.
+You can create a YAML file and copy the [contents](https://github.com/apache/pulsar/blob/master/pulsar-io/canal/src/main/resources/canal-mysql-source-config.yaml) below to your YAML file.
 
 
 ```yaml
@@ -95,21 +95,21 @@ Here is an example of storing MySQL data using the configuration file as above.
 ```
 
 3. Copy the configuration file `mysqld.cnf` to MySQL server.
-   
+
 
 ```bash
     $ docker cp mysqld.cnf pulsar-mysql:/etc/mysql/mysql.conf.d/
 ```
 
 4.  Restart the MySQL server.
-   
+
 
 ```bash
     $ docker restart pulsar-mysql
 ```
 
 5.  Create a test database in MySQL server.
-   
+
 
 ```bash
     $ docker exec -it pulsar-mysql /bin/bash
@@ -174,7 +174,7 @@ Here is an example of storing MySQL data using the configuration file as above.
 ```
 
 11. Download a Canal connector and start it.
-    
+
 
 ```bash
     $ docker exec -it pulsar-standalone /bin/bash
@@ -207,7 +207,7 @@ Here is an example of storing MySQL data using the configuration file as above.
 ```
 
 14. Create a table, and insert, delete, and update data in MySQL server.
-    
+
 
 ```bash
     mysql> use test;

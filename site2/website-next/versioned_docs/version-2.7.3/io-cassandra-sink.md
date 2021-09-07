@@ -43,7 +43,7 @@ Before using the Cassandra sink connector, you need to create a configuration fi
 ```
 
 * YAML
-  
+
 
 ```
     configs:

@@ -78,14 +78,14 @@ Here is an example of using the Kafka source connecter with the configuration fi
 ```
 
 2. Create a network.
-   
+
 
 ```bash
    $ docker network create kafka-pulsar
 ```
 
 3. Pull a ZooKeeper image and start ZooKeeper.
-   
+
 
 ```bash
    $ docker pull wurstmeister/zookeeper
@@ -94,7 +94,7 @@ Here is an example of using the Kafka source connecter with the configuration fi
 ```
 
 4. Pull a Kafka image and start Kafka.
-   
+
 
 ```bash
    $ docker pull wurstmeister/kafka:2.11-1.0.2
@@ -103,7 +103,7 @@ Here is an example of using the Kafka source connecter with the configuration fi
 ```
 
 5. Pull a Pulsar image and start Pulsar standalone.
-   
+
 
 ```bash
    $ docker pull apachepulsar/pulsar:2.4.0
@@ -112,7 +112,7 @@ Here is an example of using the Kafka source connecter with the configuration fi
 ```
 
 6. Create a producer file _kafka-producer.py_.
-   
+
 
 ```python
    from kafka import KafkaProducer
@@ -141,7 +141,7 @@ Here is an example of using the Kafka source connecter with the configuration fi
 ```
 
 8. Copy the following files to Pulsar.
-   
+
 
 ```bash
     $ docker cp pulsar-io-kafka-2.4.0.nar pulsar-kafka-standalone:/pulsar
@@ -179,7 +179,7 @@ Here is an example of using the Kafka source connecter with the configuration fi
     $ python3 kafka-producer.py
 ```
 
-    The following information appears on the consumer terminal window.
+The following information appears on the consumer terminal window.
 
 
 ```bash

@@ -67,4 +67,4 @@ Before using the HBase sink connector, you need to create a configuration file t
         qualifierNames: [ 'name', 'address', 'age']
 ```
 
-    
+
