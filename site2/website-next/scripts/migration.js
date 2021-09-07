@@ -141,6 +141,8 @@ try {
           // .replace(/(\S+)\n(```\w+)/gm, "$1\n\n$2")
           .replace(/(```\w*)((((?!```).)*\n*)+)```/g, "\n$1$2```")
           .replace(/<empty string>/g, "|")
+          .replace(/<li>(((?!<\/?li>|\|).)+)/g, "<li>$1</li>")
+          .replace(/<\/li><\/li>/g, "</li>")
           .replace(/<\/br>/g, "<br />")
           .replace(/<br>/g, "<br />")
           .replace(
