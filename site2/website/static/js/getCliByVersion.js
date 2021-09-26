@@ -1,48 +1,77 @@
-function getCliByVersion(){
-    var params = window.location.search
-    var latestVersion = document.getElementById("latestVersion").textContent
-    var clientModule = document.getElementById("clientModule").textContent
-    if (!clientModule) {
-        clientModule = "pulsar-admin"
+function compareVersion(version1, version2) {
+  const v1 = version1.split(".");
+  const v2 = version2.split(".");
+  for (let i = 0; i < v1.length || i < v2.length; ++i) {
+    let x = 0,
+      y = 0;
+    if (i < v1.length) {
+      x = parseInt(v1[i]);
     }
-    params = params.replace('?', '')
-    const paramsList = params.split('&')
-    var version = 'master'
-    for (var i in paramsList) {
-        var param = paramsList[i].split('=')
-        if (param[0] === 'version') {
-            version = param[1]
-        }
+    if (i < v2.length) {
+      y = parseInt(v2[i]);
     }
-
-    if (version === "master") {
-        var latestVersionSplit = latestVersion.split('.')
-        version = parseInt(latestVersionSplit[0]) + "." + (parseInt(latestVersionSplit[1]) + 1) + ".0"
+    if (x > y) {
+      return 1;
     }
-    var versions = version.split('.')
-    var majorVersion = parseInt(versions[0])
-    var minorVersion = parseInt(versions[1])
-    var minMinorVersion = 5
-    var referenceLink = "/pulsar-admin"
-    if (clientModule === "pulsar-client") {
-        minMinorVersion = 8
-        referenceLink = "/reference-cli-tools/#pulsar-client"
-    } else if(clientModule === "pulsar-perf") {
-        minMinorVersion = 8
-        referenceLink = "/reference-cli-tools/#pulsar-perf"
-    } else if(clientModule === "pulsar") {
-        minMinorVersion = 8
-        referenceLink = "/reference-cli-tools/#pulsar"
+    if (x < y) {
+      return -1;
     }
-    if ((majorVersion > 1 && minorVersion <= minMinorVersion) || majorVersion === 1) {
-        if (version === latestVersion) {
-            window.location.href = "/docs/en" + referenceLink
-        } else {
-            window.location.href = "/docs/en/" + version + referenceLink
-        }
-    } else {
-        version = parseInt(versions[0]) + "." + parseInt(versions[1]) + ".0"
-        window.location.href = "http://pulsar.apache.org/tools/" + clientModule + "/" + version + "-SNAPSHOT"
-    }
+  }
+  return 0;
 }
-window.onload=getCliByVersion
+
+function getCliByVersion() {
+  var params = window.location.search;
+  var latestVersion = document.getElementById("latestVersion").textContent;
+  var clientModule = document.getElementById("clientModule").textContent;
+  if (!clientModule) {
+    clientModule = "pulsar-admin";
+  }
+  params = params.replace("?", "");
+  const paramsList = params.split("&");
+  var version = "master";
+  for (var i in paramsList) {
+    var param = paramsList[i].split("=");
+    if (param[0] === "version") {
+      version = param[1];
+    }
+  }
+
+  if (version === "master") {
+    var latestVersionSplit = latestVersion.split(".");
+    version =
+      parseInt(latestVersionSplit[0]) +
+      "." +
+      (parseInt(latestVersionSplit[1]) + 1) +
+      ".0";
+  }
+  var versions = version.split(".");
+  var majorVersion = parseInt(versions[0]);
+
+  var referenceLink = "/pulsar-admin";
+  var thresholdVersion = "2.6.0";
+  if (clientModule != "pulsar-admin") {
+    thresholdVersion = "2.8.1";
+    referenceLink = "/reference-cli-tools/#" + clientModule;
+  }
+
+  if (
+    (majorVersion > 1 && compareVersion(version, thresholdVersion) < 0) ||
+    majorVersion === 1
+  ) {
+    if (version === latestVersion) {
+      window.location.href = "/docs/en" + referenceLink;
+    } else {
+      window.location.href = "/docs/en/" + version + referenceLink;
+    }
+  } else {
+    window.location.href =
+      "http://pulsar.apache.org" +
+      "/tools/" +
+      clientModule +
+      "/" +
+      version +
+      "-SNAPSHOT";
+  }
+}
+window.onload = getCliByVersion;
