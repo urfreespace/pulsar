@@ -18,7 +18,7 @@ export default function DenseTable() {
   return (
     <Layout>
       <div className="tailwind">
-        <div className="mt-24 container">
+        <div className="my-12 container">
           <h1 className="mb-6">{siteConfig.title} Versions</h1>
           <h3 className="mb-4" id="latest">
             Latest Stable Version

@@ -20,10 +20,10 @@ export default function VersionsTable(props) {
           <TableRow key={row.name}>
             <TableCell
               className="border-gray-300"
-              sx={{ border: 1 }}
+              sx={{ border: 1, color: "inherit" }}
               align="left font-bold"
             >
-              {row.name}
+              <p>{row.name}</p>
             </TableCell>
             <TableCell
               className="border-gray-300"
