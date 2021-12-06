@@ -16,6 +16,7 @@ jobs:
         with:
           node-version: 14
           cache: npm
+          cache-dependency-path: site2/website-next/yarn.lock
       - run: cd site2/website-next && yarn install && yarn build
       - name: Publish Website Next Preview
         env:
