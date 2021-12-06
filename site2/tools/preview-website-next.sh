@@ -24,7 +24,6 @@ ROOT_DIR=$(git rev-parse --show-toplevel)
 
 ORIGIN_REPO=$(git remote show origin | grep 'Push  URL' | awk -F// '{print $NF}')
 echo "ORIGIN_REPO: $ORIGIN_REPO"
-GH_TOKEN=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
 
 GENERATED_SITE_DIR=$ROOT_DIR/site2/website-next/build
 
