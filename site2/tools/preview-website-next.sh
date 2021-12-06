@@ -39,14 +39,14 @@ PULSAR_SITE_TMP=/tmp/pulsar-site-next
   mkdir content
 
   git clone "https://$PREVIEW_PUBLISH_TOKEN@$ORIGIN_REPO" .
-  git config user.name "Pulsar Site Next Updater"
+  git config user.name "Pulsar Site Next Preview Updater"
   git config user.email "dev@pulsar.incubator.apache.org"
   git checkout preview 
 
   # copy the apache generated dir
   cp -r $GENERATED_SITE_DIR/* $PULSAR_SITE_TMP/content
   git add -A .
-  git diff-index --quiet HEAD || (git commit -m "Updated site at revision $REVISION" && git push -q origin HEAD:asf-site)
+  git diff-index --quiet HEAD || (git commit -m "Updated site at revision $REVISION" && git push -q origin HEAD:preview)
 
   rm -rf $PULSAR_SITE_TMP
 )
