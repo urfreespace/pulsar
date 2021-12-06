@@ -1,4 +1,4 @@
-name: CN Website Publish CI
+name: Pulsar Website Next Publish CI
 
 on:
   # push:
