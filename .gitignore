@@ -77,8 +77,6 @@ docker.debug-info
 
 # Yarn
 
-**/yarn.lock
-
 # docusaurus
 
 **/website/i18n/*
