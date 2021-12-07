@@ -19,4 +19,5 @@ jobs:
       - name: Publish Website Next Preview
         env:
           PREVIEW_PUBLISH_TOKEN: ${{ secrets.PREVIEW_PUBLISH_TOKEN }}
+          NODE_OPTIONS: --max_old_space_size=20480
         run: cd site2/tools && sh preview-website-next.sh
