@@ -26,6 +26,9 @@ ORIGIN_REPO=$(git remote show origin | grep 'Push  URL' | awk -F// '{print $NF}'
 echo "ORIGIN_REPO: $ORIGIN_REPO"
 
 GENERATED_SITE_DIR=$ROOT_DIR/site2/website-next/build
+mkdir -p $GENERATED_SITE_DIR
+touch $GENERATED_SITE_DIR/test.txt
+echo "test 1" > $GENERATED_SITE_DIR/test.txt
 
 PULSAR_SITE_TMP=/tmp/pulsar-site-next
 (
@@ -33,9 +36,8 @@ PULSAR_SITE_TMP=/tmp/pulsar-site-next
   REVISION=$(git rev-parse --short HEAD)
 
   rm -rf $PULSAR_SITE_TMP
-  mkdir $PULSAR_SITE_TMP
+  mkdir -p $PULSAR_SITE_TMP/content
   cd $PULSAR_SITE_TMP
-  mkdir content
 
   git clone "https://$PREVIEW_PUBLISH_TOKEN@$ORIGIN_REPO" .
   git config user.name "Pulsar Site Next Preview Updater"
