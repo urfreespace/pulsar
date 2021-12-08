@@ -36,7 +36,7 @@ PULSAR_SITE_TMP=/tmp/pulsar-site-next
   REVISION=$(git rev-parse --short HEAD)
 
   rm -rf $PULSAR_SITE_TMP
-  mkdir -p $PULSAR_SITE_TMP/content/
+  mkdir $PULSAR_SITE_TMP
   cd $PULSAR_SITE_TMP
 
   git clone "https://$GH_TOKEN@$ORIGIN_REPO" .
