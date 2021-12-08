@@ -45,6 +45,7 @@ PULSAR_SITE_TMP=/tmp/pulsar-site-next
   git checkout preview 
 
   # copy the apache generated dir
+  rm -rf $PULSAR_SITE_TMP/content/
   mkdir -p $PULSAR_SITE_TMP/content/
   cp -r $GENERATED_SITE_DIR/* $PULSAR_SITE_TMP/content/
   git add -A .
