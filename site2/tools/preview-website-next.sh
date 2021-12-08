@@ -36,7 +36,7 @@ PULSAR_SITE_TMP=/tmp/pulsar-site-next
   REVISION=$(git rev-parse --short HEAD)
 
   rm -rf $PULSAR_SITE_TMP
-  mkdir $PULSAR_SITE_TMP
+  mkdir -p $PULSAR_SITE_TMP/content/
   cd $PULSAR_SITE_TMP
 
   git clone "https://$GH_TOKEN@$ORIGIN_REPO" .
@@ -45,7 +45,7 @@ PULSAR_SITE_TMP=/tmp/pulsar-site-next
   git checkout preview 
 
   # copy the apache generated dir
-  cp -r $GENERATED_SITE_DIR/* $PULSAR_SITE_TMP/content
+  cp -r $GENERATED_SITE_DIR/* $PULSAR_SITE_TMP/content/
   git add -A .
   git diff-index --quiet HEAD || (git commit -m "Updated site at revision $REVISION" && git push -q origin HEAD:preview)
 
