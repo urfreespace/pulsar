@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Apache Pulsar Blog</title>
+        <link>https://pulsar.apache.com/blog</link>
+        <description>Apache Pulsar Blog</description>
+        <lastBuildDate>Wed, 25 Aug 2021 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[Welcome]]></title>
+            <link>https://pulsar.apache.com/blog/welcome</link>
+            <guid>welcome</guid>
+            <pubDate>Wed, 25 Aug 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Welcome to Apache Pulsar.]]></description>
+            <content:encoded><![CDATA[<p>Welcome to Apache Pulsar.</p>]]></content:encoded>
+        </item>
+    </channel>
+</rss>
