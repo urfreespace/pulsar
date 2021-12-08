@@ -45,6 +45,7 @@ PULSAR_SITE_TMP=/tmp/pulsar-site-next
   git checkout preview 
 
   # copy the apache generated dir
+  mkdir -p $PULSAR_SITE_TMP/content/
   cp -r $GENERATED_SITE_DIR/* $PULSAR_SITE_TMP/content/
   git add -A .
   git diff-index --quiet HEAD || (git commit -m "Updated site at revision $REVISION" && git push -q origin HEAD:preview)
