@@ -39,7 +39,7 @@ PULSAR_SITE_TMP=/tmp/pulsar-site-next
   mkdir $PULSAR_SITE_TMP
   cd $PULSAR_SITE_TMP
 
-  git clone "https://$PREVIEW_PUBLISH_TOKEN@$ORIGIN_REPO" .
+  git clone "https://$GH_TOKEN@$ORIGIN_REPO" .
   git config user.name "Pulsar Site Next Preview Updater"
   git config user.email "dev@pulsar.incubator.apache.org"
   git checkout preview 
