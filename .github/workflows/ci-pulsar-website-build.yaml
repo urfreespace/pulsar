@@ -19,6 +19,9 @@
 
 name: CI - Pulsar Website build
 on:
+  push:
+    branches:
+      - website-debug
   schedule:
     - cron: '0 */6 * * *'
 
