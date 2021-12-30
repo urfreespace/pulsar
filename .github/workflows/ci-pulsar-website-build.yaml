@@ -86,4 +86,4 @@ jobs:
           # Build the new website
           site2/tools/docker-build-site.sh
           # Script was initially made for travis
-          # bash -e site2/tools/publish-website.sh
+          bash -e site2/tools/publish-website.sh
